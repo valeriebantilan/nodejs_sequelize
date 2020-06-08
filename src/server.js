@@ -2,7 +2,7 @@ const util = require('util');
 
 // config should be imported before importing any other file
 import {database} from '../config/database';
-import config from '../config/config';
+import {config} from '../config/config';
 import app from '../config/express';
 
 // starting database
