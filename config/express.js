@@ -1,5 +1,6 @@
 const path = require('path');
 const express = require('express');
+const logger = require('morgan');
 const bodyParser = require('body-parser');
 const httpStatus = require('http-status');
 const helmet = require('helmet');
@@ -8,9 +9,12 @@ const {config} = require('./config');
 
 const app = express();
 
+if (config.env === 'development') {
+  app.use(logger('dev'));
+}
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
 
 app.use(helmet());
 
@@ -28,13 +32,12 @@ config.files.routes.forEach(routePath => {
   require(path.resolve(routePath))(app);
 });
 
-
 // error handler, send stacktrace only during development
-// app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
-//   res.status(err.status).json({
-//     message: err.isPublic ? err.message : httpStatus[err.status],
-//     stack: config.env === 'development' ? err.stack : {}
-//   })
-// });
+app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
+  res.status(err.status).json({
+    message: err.isPublic ? err.message : httpStatus[err.status],
+    stack: config.env === 'development' ? err.stack : {}
+  })
+});
 
 module.exports = app;
