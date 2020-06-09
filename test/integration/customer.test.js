@@ -19,7 +19,7 @@ describe('Customer Api', () => {
   let user = {
     firstName: 'Valerie',
     lastName: 'Bantilan',
-    email: 'valeriebantilan@gmail.com'
+    email: 'valerietest@gmail.com'
   };
    
   
@@ -37,6 +37,7 @@ describe('Customer Api', () => {
   });
 
   describe('# POST /api/customer', () => {
+
     it('should create a new customer', (done) => {
       request(app)
         .post('/api/customer')
@@ -45,12 +46,24 @@ describe('Customer Api', () => {
         .then((res) => {
           expect(res.body.firstName).to.equal(user.firstName);
           expect(res.body.lastName).to.equal(user.lastName);
-          expect(res.body.email).to.equal(user.email);
           user = res.body;
           done();
         })
         .catch(done);
     });
+
+    it('should report error with message - Email already existed when checking email', (done) => {
+      request(app)
+        .post('/api/customer')
+        .expect(500)
+        .send(user)
+        .then((res) => {
+          expect(res.body.message).to.equal('Internal Server Error');
+          done();
+        })
+        .catch(done);
+    });
+
   });
 
 })

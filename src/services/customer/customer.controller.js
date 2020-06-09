@@ -15,7 +15,7 @@ async function getCustomer(req, res, next) {
     const {customerId: id} = req.params;
     try {
         const customer = await Customer.findOne({
-            id,
+           id,
         })
 
         return res.json(customer);
@@ -30,15 +30,17 @@ async function createCustomer(req, res, next) {
 
     try {
 
-        // const customerFindEmail = await Customer.findOne({
-        //     email,
-        // });
+        const customerFindEmail = await Customer.findOne({
+            where: {
+                email,
+            }
+        })
 
-        // if (customerFindEmail) {
-        //     err = new Error('Email existed already');
-        //     err.status = 500;
-        //     return next(err);
-        // }
+        if (customerFindEmail) {
+            err = new Error('Email existed already');
+            err.status = 500;
+            return next(err);
+        }
 
         const customer = await Customer.create({firstName, lastName, email});
 
