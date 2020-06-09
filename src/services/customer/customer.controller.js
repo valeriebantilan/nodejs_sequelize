@@ -24,6 +24,20 @@ async function getCustomer(req, res, next) {
     }
 }
 
+async function createCustomer(req, res, next) {
+    const {firstName, lastName, email} = req.body;
+
+    try {
+
+        const customer = await Customer.create({firstName, lastName, email});
+
+        return res.json(customer);
+    } catch(error) {
+        return res.json(error);
+    }
+}
+
 module.exports = {
     getCustomer,
+    createCustomer,
 }

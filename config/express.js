@@ -6,6 +6,7 @@ const httpStatus = require('http-status');
 const helmet = require('helmet');
 const cors = require('cors');
 const {config} = require('./config');
+const { ValidationError } = require('express-validation')
 
 const app = express();
 
@@ -38,6 +39,17 @@ app.use((req, res, next) => {
   err.status = 404;
   return next(err);
 });
+
+app.use(function(err, req, res, next) {
+  if (err instanceof ValidationError) {
+    // const error = new Error(unifiedErrorMessage);
+    // error.status = err.statusCode;
+    // return next(err);
+    return res.status(err.statusCode).json(err)
+  }
+  err.status = 500;
+  return next(err);
+})
 
 // error handler, send stacktrace only during development
 app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
