@@ -19,14 +19,14 @@ describe('Customer Api', () => {
   let user = {
     firstName: 'Valerie',
     lastName: 'Bantilan',
-    email: 'valerietest@gmail.com'
+    email: 'valerietest@gmail.com',
   };
    
   
   describe('#Get /api/customer/:customerId', () => {
       it('should get customer details', (done) => {
           request(app)
-          .get(`/api/customer/${user._id}`)
+          .get(`/api/customer/${1}`)
           .expect(httpStatus.OK)
           .then((res) => {
             expect(res.body.firstName).to.equal(user.firstName);
