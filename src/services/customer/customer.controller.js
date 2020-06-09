@@ -26,8 +26,19 @@ async function getCustomer(req, res, next) {
 
 async function createCustomer(req, res, next) {
     const {firstName, lastName, email} = req.body;
+    let err;
 
     try {
+
+        // const customerFindEmail = await Customer.findOne({
+        //     email,
+        // });
+
+        // if (customerFindEmail) {
+        //     err = new Error('Email existed already');
+        //     err.status = 500;
+        //     return next(err);
+        // }
 
         const customer = await Customer.create({firstName, lastName, email});
 
