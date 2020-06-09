@@ -1,6 +1,6 @@
 module.exports = {
-  allJS: ['src/server.js', 'config/*.js', 'src/components/**/*.js', 'src/helpers/*.js', 'server/test/*.js'],
-  models: 'src/components/**/*.model.js',
-  routes: 'src/components/**/*.route.js',
-  policies: 'src/components/**/*.policy.js'
+  allJS: ['src/server.js', 'config/*.js', 'src/services/**/*.js', 'test/**/*.js'],
+  models: 'src/services/**/*.model.js',
+  routes: 'src/services/**/*.route.js',
+  policies: 'src/services/**/*.policy.js'
 };

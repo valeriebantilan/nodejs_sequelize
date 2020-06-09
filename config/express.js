@@ -32,6 +32,11 @@ config.files.routes.forEach(routePath => {
   require(path.resolve(routePath))(app);
 });
 
+// catch 404 and forward to error handler
+app.use((req, res, next) => {
+  return next(new Error('Api Npt Found'));
+});
+
 // error handler, send stacktrace only during development
 app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
   res.status(err.status).json({

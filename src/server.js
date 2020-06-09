@@ -1,8 +1,8 @@
 const util = require('util');
 
 // config should be imported before importing any other file
-import {database} from '../config/database';
-import {config} from '../config/config';
+import { config } from '../config/config';
+import { database } from '../config/database';
 import app from '../config/express';
 
 // starting database
@@ -11,9 +11,7 @@ try {
 		await database.authenticate().catch(e => {
 			return new Error(e);
 		});
-		// await DB.sync();
 	}
-
 	startingDatabase();
 
 	console.info('connection to the database has been established successfully')
