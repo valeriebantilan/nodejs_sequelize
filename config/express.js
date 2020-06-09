@@ -34,7 +34,9 @@ config.files.routes.forEach(routePath => {
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
-  return next(new Error('Api Npt Found'));
+  var err = new Error('Api Not Found');
+  err.status = 404;
+  return next(err);
 });
 
 // error handler, send stacktrace only during development
