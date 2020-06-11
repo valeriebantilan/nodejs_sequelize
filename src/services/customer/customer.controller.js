@@ -8,7 +8,8 @@ const httpStatus = require('http-status');
 const moment = require('moment');
 
 const {
-    Customer
+    Customer,
+    Transaction
 } = require(path.resolve('./config/sequelize'));
 
 async function getCustomer(req, res, next) {
@@ -19,7 +20,7 @@ async function getCustomer(req, res, next) {
                id: id,
             },
             include: [{
-                model: Transaction
+                model: Transaction,
             }]
         })
 
