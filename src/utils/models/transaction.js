@@ -1,6 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const Transaction = sequelize.define('Transaction', {
+  const Transaction = sequelize.define('Transactions', {
     customer_id: { type: DataTypes.INTEGER, validate: { notNull: false } },
     transaction_name: DataTypes.STRING,
     transaction_type: DataTypes.STRING,

@@ -17,7 +17,10 @@ async function getCustomer(req, res, next) {
         const customer = await Customer.findOne({
             where: {
                id: id,
-           }
+            },
+            include: [{
+                model: Transaction
+            }]
         })
 
         return res.json(customer);
